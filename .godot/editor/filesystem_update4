@@ -10,3 +10,6 @@ res://Environment/Terrain/terrain_mat.tres
 res://Environment/grass/grass_mat.tres
 res://Enemies/beetle_bot/materials/beetlebot_lights_mat.tres
 res://shared/shaders/screen_shader.gdshader
+res://Player/Player.tscn
+res://Playground.tscn
+res://DemoPage/DemoPage.tscn
