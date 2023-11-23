@@ -3,6 +3,7 @@ extends StaticBody3D
 # const COIN_SCENE := preload("res://Player/Coin/Coin.tscn")
 # const COINS_COUNT := 5
 # const DESTROYED_BOX_SCENE := preload("res://Box/DestroyedBox.tscn")
+const PUFF_SCENE := preload("res://Enemies/smoke_puff/smoke_puff.tscn")
 
 # @onready var _destroy_sound: AudioStreamPlayer3D = $DestroySound
 # @onready var _collision_shape: CollisionShape3D = $CollisionShape3d
@@ -29,4 +30,8 @@ func damage(_impact_point: Vector3, _force: Vector3):
 	# queue_free()
 	
 	mesh.set_surface_override_material(0, ColourMaterial)
-	print("ovrided")
+	var puff := PUFF_SCENE.instantiate()
+	get_parent().add_child(puff)
+	puff.global_position = global_position
+	puff.scale = Vector3(0.1, 0.1, 0.1)
+	await puff.full
