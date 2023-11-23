@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkjobnbqvx2qi"]
+
+[ext_resource type="PackedScene" uid="uid://bx1mycl1tjvju" path="res://Village/models/grass2.fbx" id="1_ukw4k"]
+
+[node name="grass2" instance=ExtResource("1_ukw4k")]

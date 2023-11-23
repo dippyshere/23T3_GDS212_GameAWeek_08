@@ -31,17 +31,11 @@ var _euler_rotation: Vector3
 
 func _unhandled_input(event: InputEvent) -> void:
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-	if _mouse_input:
-		_rotation_input = -event.relative.x * mouse_sensitivity
-		_tilt_input = -event.relative.y * mouse_sensitivity
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not _anchor:
 		return
-
-	_rotation_input += Input.get_action_raw_strength("camera_left") - Input.get_action_raw_strength("camera_right")
-	_tilt_input += Input.get_action_raw_strength("camera_up") - Input.get_action_raw_strength("camera_down")
 
 	if invert_mouse_y:
 		_tilt_input *= -1

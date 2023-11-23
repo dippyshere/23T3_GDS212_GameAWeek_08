@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4igwynccogl2"]
+
+[ext_resource type="Script" path="res://ColourTest/ColourControl.gd" id="1_33kg8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mo5e3"]
+albedo_color = Color(0, 0.768627, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ylaj"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ly28"]
+
+[node name="ColourBox2" type="StaticBody3D" groups=["damageables", "targetables"]]
+script = ExtResource("1_33kg8")
+ColourMaterial = SubResource("StandardMaterial3D_mo5e3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5ylaj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3ly28")

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6xdqcft1s5pt"]
+
+[ext_resource type="PackedScene" uid="uid://byp31lsxou3di" path="res://Village/models/rock2.fbx" id="1_bexf5"]
+
+[node name="rock2" instance=ExtResource("1_bexf5")]

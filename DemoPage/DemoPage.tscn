@@ -87,6 +87,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.35
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/DemoPageRoot/Content/Title"]
+visible = false
 layout_mode = 0
 anchor_top = 0.5
 anchor_right = 1.0
@@ -99,6 +100,7 @@ texture = ExtResource("3_n7elw")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/DemoPageRoot/Content/Title"]
+visible = false
 layout_mode = 0
 offset_left = 1043.0
 offset_top = 158.0
@@ -112,10 +114,12 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SampleImageContainer" type="Control" parent="CanvasLayer/DemoPageRoot/Content/Content"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Mask" type="NinePatchRect" parent="CanvasLayer/DemoPageRoot/Content/Content/SampleImageContainer"]
+visible = false
 clip_children = 1
 layout_mode = 0
 anchor_left = 0.277
@@ -153,19 +157,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 52
+theme_override_constants/margin_left = 540
+theme_override_constants/margin_top = 42
 
 [node name="ContentContainer" type="VBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer"]
 layout_mode = 2
 
 [node name="Title" type="Label" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 1
 text = "Third-Person Shooter"
 label_settings = SubResource("LabelSettings_y4f87")
 
 [node name="Inspirations" type="RichTextLabel" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("6_r37av")
@@ -180,7 +186,8 @@ theme_override_constants/margin_right = 10
 [node name="Description" type="Label" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/DescriptionMargin"]
 layout_mode = 2
 size_flags_vertical = 1
-text = "This demo features a simple character controller for Third-Person Shooter games. The player can move around, jump, attack, shoot projectiles and launch grenades. Collect Godot-coins by destroying crates!"
+text = "You've been tasked with restoring colour to the world!
+Paint objects to reveal hidden secrets"
 label_settings = SubResource("LabelSettings_g5g84")
 autowrap_mode = 2
 
@@ -203,7 +210,6 @@ theme_override_constants/separation = 20
 
 [node name="GridContainerKeyboard" type="GridContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 columns = 2
 
@@ -239,6 +245,7 @@ text = ": Jump"
 label_settings = SubResource("LabelSettings_f30p8")
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerKeyboard"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -271,6 +278,7 @@ text = ": Pause"
 label_settings = SubResource("LabelSettings_f30p8")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerKeyboard"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -299,10 +307,11 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerKeyboard/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = ": Attack"
+text = ": Paint"
 label_settings = SubResource("LabelSettings_f30p8")
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerKeyboard"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -340,6 +349,7 @@ text = ": Movement"
 label_settings = SubResource("LabelSettings_f30p8")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerJoypad"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -372,6 +382,7 @@ text = ": Jump"
 label_settings = SubResource("LabelSettings_f30p8")
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerJoypad"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -400,10 +411,11 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerJoypad/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = ": Attack"
+text = ": Paint"
 label_settings = SubResource("LabelSettings_f30p8")
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerJoypad"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -432,7 +444,7 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerJoypad/HBoxContainer7"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = ": Pause / Resume"
+text = ": Pause"
 label_settings = SubResource("LabelSettings_f30p8")
 
 [node name="ButtonContainer" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer"]
@@ -484,7 +496,7 @@ mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("6_r37av")
 theme_override_font_sizes/font_size = 26
 action_mode = 0
-text = "  Resume demo  "
+text = "   Resume   "
 
 [node name="Exit" type="Button" parent="CanvasLayer/DemoPageRoot/Content/MarginContainer/Buttons"]
 layout_mode = 2
@@ -492,9 +504,10 @@ mouse_default_cursor_shape = 2
 theme_override_fonts/font = ExtResource("6_r37av")
 theme_override_font_sizes/font_size = 26
 action_mode = 0
-text = "  Exit demo  "
+text = "   Quit   "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/DemoPageRoot"]
+visible = false
 layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0

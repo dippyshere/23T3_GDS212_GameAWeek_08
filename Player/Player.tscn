@@ -187,6 +187,7 @@ disabled = true
 [node name="CharacterSkin" parent="CharacterRotationRoot" instance=ExtResource("4_ign62")]
 
 [node name="PlayerUI" type="Control" parent="." groups=["camera_mode_toggle"]]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -238,10 +239,11 @@ transparent_bg = true
 handle_input_locally = false
 gui_disable_input = true
 size = Vector2i(96, 96)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Coin" parent="PlayerUI/CoinsContainer/SubViewportContainer/SubViewport" instance=ExtResource("8_6qxxt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.812403)
+visible = false
 
 [node name="godot_coin" parent="PlayerUI/CoinsContainer/SubViewportContainer/SubViewport/Coin" index="0"]
 transform = Transform3D(0.278847, 0, 0.960336, 0, 1, 0, -0.960336, 0, 0.278847, 0, 0, 0)
@@ -249,9 +251,11 @@ y_amplitude = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="PlayerUI/CoinsContainer/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.604131)
+visible = false
 current = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="PlayerUI/CoinsContainer/SubViewportContainer/SubViewport"]
+visible = false
 
 [node name="CoinsLabel" type="Label" parent="PlayerUI/CoinsContainer"]
 layout_mode = 2

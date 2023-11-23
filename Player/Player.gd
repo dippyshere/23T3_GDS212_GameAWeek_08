@@ -78,17 +78,10 @@ func _physics_process(delta: float) -> void:
 	if global_position.y < _ground_height:
 		_ground_height = global_position.y
 
-	# Swap weapons
-	if Input.is_action_just_pressed("swap_weapons"):
-		_equipped_weapon = WEAPON_TYPE.DEFAULT if _equipped_weapon == WEAPON_TYPE.GRENADE else WEAPON_TYPE.GRENADE
-		_grenade_aim_controller.visible = _equipped_weapon == WEAPON_TYPE.GRENADE
-		emit_signal("weapon_switched", WEAPON_TYPE.keys()[_equipped_weapon])
-
 	# Get input and movement state
 	var is_attacking := Input.is_action_pressed("attack") and not _attack_animation_player.is_playing()
 	var is_just_attacking := Input.is_action_just_pressed("attack")
 	var is_just_jumping := Input.is_action_just_pressed("jump") and is_on_floor()
-	var is_aiming := Input.is_action_pressed("aim") and is_on_floor()
 	var is_air_boosting := Input.is_action_pressed("jump") and not is_on_floor() and velocity.y > 0.0
 	var is_just_on_floor := is_on_floor() and not _is_on_floor_buffer
 
@@ -99,8 +92,6 @@ func _physics_process(delta: float) -> void:
 	# this also ensures a good normalized value for the rotation basis.
 	if _move_direction.length() > 0.2:
 		_last_strong_direction = _move_direction.normalized()
-	if is_aiming:
-		_last_strong_direction = (_camera_controller.global_transform.basis * Vector3.BACK).normalized()
 
 	_orient_character_to_direction(_last_strong_direction, delta)
 
@@ -113,16 +104,10 @@ func _physics_process(delta: float) -> void:
 	velocity.y = y_velocity
 
 	# Set aiming camera and UI
-	if is_aiming:
-		_camera_controller.set_pivot(_camera_controller.CAMERA_PIVOT.OVER_SHOULDER)
-		_grenade_aim_controller.throw_direction = _camera_controller.camera.quaternion * Vector3.FORWARD
-		_grenade_aim_controller.from_look_position = _camera_controller.camera.global_position
-		_ui_aim_recticle.visible = true
-	else:
-		_camera_controller.set_pivot(_camera_controller.CAMERA_PIVOT.THIRD_PERSON)
-		_grenade_aim_controller.throw_direction = _last_strong_direction
-		_grenade_aim_controller.from_look_position = global_position
-		_ui_aim_recticle.visible = false
+	_camera_controller.set_pivot(_camera_controller.CAMERA_PIVOT.THIRD_PERSON)
+	_grenade_aim_controller.throw_direction = _last_strong_direction
+	_grenade_aim_controller.from_look_position = global_position
+	_ui_aim_recticle.visible = false
 
 	# Update attack state and position
 
@@ -132,11 +117,7 @@ func _physics_process(delta: float) -> void:
 	if is_attacking:
 		match _equipped_weapon:
 			WEAPON_TYPE.DEFAULT:
-				if is_aiming and is_on_floor():
-					if _shoot_cooldown_tick > shoot_cooldown:
-						_shoot_cooldown_tick = 0.0
-						shoot()
-				elif is_just_attacking:
+				if is_just_attacking:
 					attack()
 			WEAPON_TYPE.GRENADE:
 				if _grenade_cooldown_tick > grenade_cooldown:
@@ -262,13 +243,7 @@ func _register_input_actions() -> void:
 		"move_down": KEY_S,
 		"jump": KEY_SPACE,
 		"attack": MOUSE_BUTTON_LEFT,
-		"aim": MOUSE_BUTTON_RIGHT,
-		"swap_weapons": KEY_TAB,
 		"pause": KEY_ESCAPE,
-		"camera_left": KEY_Q,
-		"camera_right": KEY_E,
-		"camera_up": KEY_R,
-		"camera_down": KEY_F,
 	}
 	for action in INPUT_ACTIONS:
 		if InputMap.has_action(action):

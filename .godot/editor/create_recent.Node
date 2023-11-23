@@ -1,3 +1,7 @@
+CollisionPolygon3D
+StaticBody3D
+CollisionShape3D
+MeshInstance3D
 Area2D
 Camera3D
 SpringArm3D

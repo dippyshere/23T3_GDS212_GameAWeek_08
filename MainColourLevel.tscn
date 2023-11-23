@@ -1,0 +1,142 @@
+[gd_scene load_steps=18 format=3 uid="uid://05kipgndox8l"]
+
+[ext_resource type="PackedScene" uid="uid://mb58xbunfaep" path="res://icons/weapon_ui.tscn" id="1_thcid"]
+[ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://Environment/sky/blue_sky.tres" id="2_10whi"]
+[ext_resource type="PackedScene" uid="uid://ciqrpd5675boy" path="res://Player/Player.tscn" id="3_vsc6m"]
+[ext_resource type="PackedScene" uid="uid://c0a7kix81ug1a" path="res://Village/scenes/fence.tscn" id="9_f1445"]
+[ext_resource type="Shader" path="res://Environment/water/water_shader.gdshader" id="10_me04l"]
+[ext_resource type="Texture2D" uid="uid://ssrlnj65d4bs" path="res://Environment/water/textures/caustic_texture.png" id="11_dx7xt"]
+[ext_resource type="Script" path="res://Level/DeathPlane.gd" id="12_qb5x3"]
+[ext_resource type="PackedScene" uid="uid://cnj0t3ad178q6" path="res://DemoPage/DemoPage.tscn" id="19_lg2yk"]
+[ext_resource type="AudioStream" uid="uid://bveh08m6w5ryf" path="res://Level/Music/mountain.mp3" id="20_p5ajn"]
+
+[sub_resource type="Environment" id="Environment_allox"]
+background_mode = 2
+background_color = Color(0.8, 0.913725, 1, 1)
+sky = ExtResource("2_10whi")
+ambient_light_source = 3
+ambient_light_color = Color(0.298039, 0.698039, 0.972549, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 0.9
+tonemap_white = 1.2
+ssao_enabled = true
+ssao_intensity = 8.0
+ssao_detail = 1.0
+ssao_sharpness = 0.5
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 0.5
+ssil_enabled = true
+sdfgi_enabled = true
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 1.0
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_ambient_inject = 1.0
+adjustment_saturation = 2.33
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_le7wx"]
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_71o0d"]
+seamless = true
+noise = SubResource("FastNoiseLite_le7wx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylhgr"]
+render_priority = -1
+shader = ExtResource("10_me04l")
+shader_parameter/water_color = Color(0.133333, 0.490196, 0.823529, 1)
+shader_parameter/water_depth_color = Color(0.164706, 0.537255, 0.901961, 1)
+shader_parameter/water_edge_distance = 0.4
+shader_parameter/water_depth_distance = 8.0
+shader_parameter/water_texture_scale = 40.0
+shader_parameter/main_noise_sampler = SubResource("NoiseTexture2D_71o0d")
+shader_parameter/caustic_sampler = ExtResource("11_dx7xt")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eflel"]
+size = Vector2(300, 300)
+subdivide_width = 30
+subdivide_depth = 30
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gym67"]
+size = Vector3(130, 6, 130)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nb3pr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rm00k"]
+
+[node name="Playground" type="Node3D"]
+
+[node name="weapon_switch_ui" parent="." instance=ExtResource("1_thcid")]
+anchors_preset = 2
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -92.0
+offset_right = 192.0
+offset_bottom = -24.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_allox")
+
+[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(1, 0.952941, 0.929412, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("3_vsc6m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -13.017)
+move_speed = 7.0
+attack_impulse = 6.0
+acceleration = 5.0
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.12, -2, 7.71762)
+material_override = SubResource("ShaderMaterial_ylhgr")
+mesh = SubResource("PlaneMesh_eflel")
+
+[node name="DeathPlane" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+script = ExtResource("12_qb5x3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane"]
+shape = SubResource("BoxShape3D_gym67")
+
+[node name="DemoPage" parent="." instance=ExtResource("19_lg2yk")]
+
+[node name="StageMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_p5ajn")
+autoplay = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(51.8308, 0, 0, 0, 6.14461, 0, 0, 0, 122.192, 0, -3.072, 37.272)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_nb3pr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_rm00k")
+
+[node name="fence" parent="." instance=ExtResource("9_f1445")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -22.953)
+
+[node name="fence2" parent="." instance=ExtResource("9_f1445")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.63133, 0, -22.953)
+
+[node name="fence3" parent="." instance=ExtResource("9_f1445")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.1904, 0, -22.953)
+
+[node name="fence4" parent="." instance=ExtResource("9_f1445")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.53101, 0, -22.953)
+
+[node name="fence5" parent="." instance=ExtResource("9_f1445")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.9183, 0, -22.953)
+
+[connection signal="weapon_switched" from="Player" to="weapon_switch_ui" method="switch_to"]
