@@ -95,7 +95,7 @@ subdivide_width = 30
 subdivide_depth = 30
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gym67"]
-size = Vector3(130, 6, 130)
+size = Vector3(130, 6, 254.021)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nb3pr"]
 
@@ -141,6 +141,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 script = ExtResource("12_qb5x3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeathPlane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 19.603)
 shape = SubResource("BoxShape3D_gym67")
 
 [node name="DemoPage" parent="." instance=ExtResource("19_lg2yk")]
