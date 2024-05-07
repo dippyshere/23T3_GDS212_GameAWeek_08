@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://cnj0t3ad178q6"]
+[gd_scene load_steps=32 format=3 uid="uid://cnj0t3ad178q6"]
 
 [ext_resource type="Script" path="res://DemoPage/DemoPage.gd" id="1_4brsx"]
-[ext_resource type="Shader" path="res://DemoPage/Assets/BlurShader.gdshader" id="2_07raf"]
 [ext_resource type="Texture2D" uid="uid://3fxtm3u8im2" path="res://DemoPage/Assets/gdquest_logo_white.svg" id="3_n7elw"]
 [ext_resource type="Texture2D" uid="uid://c1h5gk8rsf3va" path="res://DemoPage/Assets/RoundedRectangle.png" id="4_paxwi"]
 [ext_resource type="Texture2D" uid="uid://bisdpbdirkat6" path="res://DemoPage/Assets/DemoPageBackground.png" id="5_3cf56"]
@@ -16,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://drxg34lsicm31" path="res://DemoPage/ControllerIcons/mouse.png" id="10_y1v2l"]
 [ext_resource type="Texture2D" uid="uid://cwnhk6pv52ilv" path="res://DemoPage/ControllerIcons/gamepad.png" id="11_eh4lo"]
 [ext_resource type="Texture2D" uid="uid://cercyyjcwv0x8" path="res://DemoPage/ControllerIcons/esc.png" id="11_ittqo"]
-[ext_resource type="Texture2D" uid="uid://betbepmba8wdn" path="res://DemoPage/ControllerIcons/mouseRight.png" id="11_pk6rw"]
 [ext_resource type="Texture2D" uid="uid://dnanigj1fkkop" path="res://DemoPage/ControllerIcons/mouseLeft.png" id="12_baaxu"]
 [ext_resource type="Texture2D" uid="uid://cgp8kkys51rsh" path="res://DemoPage/ControllerIcons/joystickR_side.png" id="15_svyf1"]
 [ext_resource type="Texture2D" uid="uid://26gko37h02x" path="res://DemoPage/ControllerIcons/down_button.png" id="16_rl0yy"]
@@ -28,8 +26,36 @@
 [ext_resource type="Texture2D" uid="uid://4028ms3tu0f0" path="res://DemoPage/Assets/twitter-icon.png" id="26_jj2ra"]
 [ext_resource type="Texture2D" uid="uid://bu5fw8vbrfsmm" path="res://DemoPage/Assets/itch-icon.png" id="27_mjmj1"]
 
+[sub_resource type="Shader" id="Shader_txjb3"]
+code = "shader_type canvas_item;
+
+uniform vec2 blur_scale = vec2(1, 0);
+uniform vec4 color_modulate: source_color;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, repeat_disable, filter_nearest;
+
+const int SAMPLES = 8;
+const float WEIGHTS[70] = {0.000008, 0.000014, 0.000022, 0.000035, 0.000054, 0.000084, 0.000127, 0.000189, 0.000279, 0.000405, 0.00058, 0.00082, 0.001141, 0.001567, 0.002121, 0.002831, 0.003726, 0.004835, 0.006186, 0.007804, 0.009708, 0.011908, 0.014402, 0.017174, 0.020194, 0.023412, 0.026764, 0.030168, 0.033529, 0.036743, 0.039703, 0.042301, 0.044438, 0.046031, 0.047013, 0.047346, 0.047013, 0.046031, 0.044438, 0.042301, 0.039703, 0.036743, 0.033529, 0.030168, 0.026764, 0.023412, 0.020194, 0.017174, 0.014402, 0.011908, 0.009708, 0.007804, 0.006186, 0.004835, 0.003726, 0.002831, 0.002121, 0.001567, 0.001141, 0.00082, 0.00058, 0.000405, 0.000279, 0.000189, 0.000127, 0.000084, 0.000054, 0.000035, 0.000022, 0.000014};
+
+void fragment() {
+    vec2 scale = SCREEN_PIXEL_SIZE * blur_scale;
+
+    float total_weight = 0.0;
+    vec4 color = vec4(0.0);
+
+    for (int i = -SAMPLES / 2; i <= SAMPLES / 2; ++i) {
+        for (int j = -SAMPLES / 2; j <= SAMPLES / 2; ++j) {
+            int weight_index = (i + SAMPLES/2) * SAMPLES + (j + SAMPLES/2);
+            float weight = WEIGHTS[weight_index];
+            color.rgb += texture(SCREEN_TEXTURE, UV + scale * vec2(float(i), float(j))).rgb * weight;
+            total_weight += weight;
+        }
+    }
+
+    COLOR.rgb = (color.rgb / total_weight) * color_modulate.rgb;
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oq2x4"]
-shader = ExtResource("2_07raf")
+shader = SubResource("Shader_txjb3")
 shader_parameter/blur_scale = Vector2(4, 4)
 shader_parameter/color_modulate = Color(0.780392, 0.717647, 0.968627, 1)
 
@@ -72,6 +98,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Content" type="VBoxContainer" parent="CanvasLayer/DemoPageRoot"]
 layout_mode = 0
@@ -301,7 +328,7 @@ size_flags_horizontal = 3
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerKeyboard/HBoxContainer4"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
-texture = ExtResource("11_pk6rw")
+texture = ExtResource("12_baaxu")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="CanvasLayer/DemoPageRoot/Content/Content/GameDescription/MarginContainer/ContentContainer/ControlsDescription/MarginContainer/VBoxContainer/GridContainerKeyboard/HBoxContainer4"]

@@ -1,11 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-signal weapon_switched(weapon_name: String)
-
-const BULLET_SCENE := preload("Bullet.tscn")
-const COIN_SCENE := preload("Coin/Coin.tscn")
-
 enum WEAPON_TYPE { DEFAULT, GRENADE }
 
 ## Character maximum run speed on the ground.
@@ -36,7 +31,6 @@ enum WEAPON_TYPE { DEFAULT, GRENADE }
 @onready var _camera_controller: CameraController = $CameraController
 @onready var _attack_animation_player: AnimationPlayer = $CharacterRotationRoot/MeleeAnchor/AnimationPlayer
 @onready var _ground_shapecast: ShapeCast3D = $GroundShapeCast
-@onready var _grenade_aim_controller: GrenadeLauncher = $GrenadeLauncher
 @onready var _character_skin: CharacterSkin = $CharacterRotationRoot/CharacterSkin
 @onready var _ui_aim_recticle: ColorRect = %AimRecticle
 @onready var _ui_coins_container: HBoxContainer = %CoinsContainer
@@ -59,8 +53,6 @@ enum WEAPON_TYPE { DEFAULT, GRENADE }
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_camera_controller.setup(self)
-	_grenade_aim_controller.visible = false
-	emit_signal("weapon_switched", WEAPON_TYPE.keys()[0])
 	
 	# When copying this character to a new project, the project may lack required input actions.
 	# In that case, we register input actions for the user at runtime.
@@ -105,8 +97,6 @@ func _physics_process(delta: float) -> void:
 
 	# Set aiming camera and UI
 	_camera_controller.set_pivot(_camera_controller.CAMERA_PIVOT.THIRD_PERSON)
-	_grenade_aim_controller.throw_direction = _last_strong_direction
-	_grenade_aim_controller.from_look_position = global_position
 	_ui_aim_recticle.visible = false
 
 	# Update attack state and position
@@ -122,7 +112,6 @@ func _physics_process(delta: float) -> void:
 			WEAPON_TYPE.GRENADE:
 				if _grenade_cooldown_tick > grenade_cooldown:
 					_grenade_cooldown_tick = 0.0
-					_grenade_aim_controller.throw_grenade()
 
 	velocity.y += _gravity * delta
 
@@ -166,15 +155,7 @@ func attack() -> void:
 
 
 func shoot() -> void:
-	var bullet := BULLET_SCENE.instantiate()
-	bullet.shooter = self
-	var origin := global_position + Vector3.UP
-	var aim_target := _camera_controller.get_aim_target()
-	var aim_direction := (aim_target - origin).normalized()
-	bullet.velocity = aim_direction * bullet_speed
-	bullet.distance_limit = 14.0
-	get_parent().add_child(bullet)
-	bullet.global_position = origin
+	pass
 
 
 func reset_position() -> void:
@@ -189,11 +170,6 @@ func collect_coin() -> void:
 func lose_coins() -> void:
 	var lost_coins: int = min(_coins, 5)
 	_coins -= lost_coins
-	for i in lost_coins:
-		var coin := COIN_SCENE.instantiate()
-		get_parent().add_child(coin)
-		coin.global_position = global_position
-		coin.spawn(1.5)
 	_ui_coins_container.update_coins_amount(_coins)
 
 

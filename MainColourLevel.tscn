@@ -1,6 +1,5 @@
-[gd_scene load_steps=55 format=3 uid="uid://05kipgndox8l"]
+[gd_scene load_steps=54 format=3 uid="uid://05kipgndox8l"]
 
-[ext_resource type="PackedScene" uid="uid://mb58xbunfaep" path="res://icons/weapon_ui.tscn" id="1_thcid"]
 [ext_resource type="Sky" uid="uid://jonn5eom7asv" path="res://Environment/sky/blue_sky.tres" id="2_10whi"]
 [ext_resource type="PackedScene" uid="uid://ciqrpd5675boy" path="res://Player/Player.tscn" id="3_vsc6m"]
 [ext_resource type="PackedScene" uid="uid://cvsi0sl5l4tis" path="res://Village/scenes/barrel.tscn" id="9_14vtm"]
@@ -51,20 +50,25 @@
 background_mode = 2
 background_color = Color(0.8, 0.913725, 1, 1)
 sky = ExtResource("2_10whi")
+ambient_light_source = 3
+ambient_light_color = Color(0.282353, 0.701961, 0.976471, 1)
 reflected_light_source = 2
 tonemap_mode = 2
 tonemap_exposure = 0.9
 tonemap_white = 1.2
 ssao_enabled = true
-ssao_intensity = 3.0
+ssao_radius = 1.49
+ssao_intensity = 4.7
 ssao_detail = 1.0
 ssao_sharpness = 0.5
 ssao_light_affect = 1.0
 ssao_ao_channel_affect = 0.5
 sdfgi_enabled = true
 sdfgi_use_occlusion = true
-sdfgi_bounce_feedback = 1.0
+sdfgi_bounce_feedback = 1.99
+sdfgi_cascades = 3
 glow_enabled = true
+glow_intensity = 1.65
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 volumetric_fog_emission = Color(1, 1, 1, 1)
@@ -102,19 +106,7 @@ size = Vector3(130, 6, 254.021)
 [sub_resource type="BoxMesh" id="BoxMesh_rm00k"]
 
 [node name="Playground" type="Node3D"]
-
-[node name="weapon_switch_ui" parent="." instance=ExtResource("1_thcid")]
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-offset_left = 32.0
-offset_top = -92.0
-offset_right = 192.0
-offset_bottom = -24.0
-grow_horizontal = 1
-grow_vertical = 0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_allox")
@@ -123,6 +115,7 @@ environment = SubResource("Environment_allox")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 light_color = Color(1, 0.952941, 0.929412, 1)
 light_energy = 1.5
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_vsc6m")]
@@ -437,5 +430,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.31621, 0.000306368, 32.958
 
 [node name="grass19" parent="." instance=ExtResource("40_kfped")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.1522, -1.90735e-06, 37.0255)
-
-[connection signal="weapon_switched" from="Player" to="weapon_switch_ui" method="switch_to"]
