@@ -9,7 +9,7 @@ data = PackedVector3Array(0.1372, -0.098, -0.1266, 0.1372, 0.068, -0.1266, 0.197
 
 [node name="house_lvl6" unique_id=897539243 instance=ExtResource("1_mp3yy")]
 
-[node name="RootNode_house_lvl6#StaticBody3D" type="StaticBody3D" parent="house_lvl6" parent_id_path=PackedInt32Array(1105255221) index="0" unique_id=1877794922 groups=["damageables"]]
+[node name="RootNode_house_lvl6#StaticBody3D" type="StaticBody3D" parent="house_lvl6" parent_id_path=PackedInt32Array(633190985) index="0" unique_id=1877794922 groups=["damageables"]]
 script = ExtResource("2_iqccw")
 ColourMaterial = ExtResource("3_frs1c")
 

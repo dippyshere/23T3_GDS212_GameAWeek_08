@@ -1,5 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfugnq088vesb"]
+[gd_scene format=3 uid="uid://cfugnq088vesb"]
 
 [ext_resource type="PackedScene" uid="uid://fiuig0ex32h2" path="res://Village/models/rock1.fbx" id="1_kikpj"]
+[ext_resource type="Script" uid="uid://cg5u8mhqgvyrr" path="res://ColourTest/ColourControl.gd" id="2_ro3l6"]
+[ext_resource type="Material" uid="uid://dbf5cdsu6u6mq" path="res://Village/materials/Material #25.tres" id="3_puyw4"]
 
-[node name="rock1" instance=ExtResource("1_kikpj")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gk2cf"]
+size = Vector3(0.078125, 0.07714844, 0.07373047)
+
+[node name="rock1" unique_id=1963763604 instance=ExtResource("1_kikpj")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="rock1" parent_id_path=PackedInt32Array(92331903) index="0" unique_id=686658534 groups=["damageables"]]
+script = ExtResource("2_ro3l6")
+ColourMaterial = ExtResource("3_puyw4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rock1/StaticBody3D" index="0" unique_id=1557554692]
+transform = Transform3D(1.0000005, 0, 0, 0, 1.0000007, -2.842171e-14, 0, 2.842171e-14, 1.0000007, 0, 2.4424907e-15, -0.059326224)
+shape = SubResource("BoxShape3D_gk2cf")

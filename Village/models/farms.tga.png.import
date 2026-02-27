@@ -2,20 +2,22 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1shhfqauombe"
-path="res://.godot/imported/village farm_houses.tga.png-819c23761ab315b966fcbd1cecc0a298.ctex"
+uid="uid://bk4ajnsmhd10m"
+path.s3tc="res://.godot/imported/farms.tga.png-f7e855baf431aad31b0a3af7e0d026ca.s3tc.ctex"
+path.etc2="res://.godot/imported/farms.tga.png-f7e855baf431aad31b0a3af7e0d026ca.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://Village/models/village farm_houses.tga.png"
-dest_files=["res://.godot/imported/village farm_houses.tga.png-819c23761ab315b966fcbd1cecc0a298.ctex"]
+source_file="res://Village/models/farms.tga.png"
+dest_files=["res://.godot/imported/farms.tga.png-f7e855baf431aad31b0a3af7e0d026ca.s3tc.ctex", "res://.godot/imported/farms.tga.png-f7e855baf431aad31b0a3af7e0d026ca.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

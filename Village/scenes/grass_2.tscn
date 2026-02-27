@@ -1,5 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkjobnbqvx2qi"]
+[gd_scene format=3 uid="uid://dkjobnbqvx2qi"]
 
 [ext_resource type="PackedScene" uid="uid://bx1mycl1tjvju" path="res://Village/models/grass2.fbx" id="1_ukw4k"]
+[ext_resource type="Script" uid="uid://cg5u8mhqgvyrr" path="res://ColourTest/ColourControl.gd" id="2_j0rxr"]
+[ext_resource type="Material" uid="uid://dbf5cdsu6u6mq" path="res://Village/materials/Material #25.tres" id="3_u82dd"]
 
-[node name="grass2" instance=ExtResource("1_ukw4k")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_q2rwv"]
+size = Vector3(0.19921875, 0.21484375, 0.0715332)
+
+[node name="grass2" unique_id=1560052595 instance=ExtResource("1_ukw4k")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="grass2" parent_id_path=PackedInt32Array(184811540) index="0" unique_id=1978342022 groups=["damageables"]]
+script = ExtResource("2_j0rxr")
+ColourMaterial = ExtResource("3_u82dd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="grass2/StaticBody3D" index="0" unique_id=584869938]
+transform = Transform3D(1.0000005, 0, 0, 0, 1.0000007, -2.842171e-14, 0, 2.842171e-14, 1.0000007, 0, 2.8865799e-15, -0.05651861)
+shape = SubResource("BoxShape3D_q2rwv")

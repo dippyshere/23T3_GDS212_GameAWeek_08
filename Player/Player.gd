@@ -32,8 +32,7 @@ enum WEAPON_TYPE { DEFAULT, GRENADE }
 @onready var _attack_animation_player: AnimationPlayer = $CharacterRotationRoot/MeleeAnchor/AnimationPlayer
 @onready var _ground_shapecast: ShapeCast3D = $GroundShapeCast
 @onready var _character_skin: CharacterSkin = $CharacterRotationRoot/CharacterSkin
-@onready var _ui_aim_recticle: ColorRect = %AimRecticle
-@onready var _ui_coins_container: HBoxContainer = %CoinsContainer
+@onready var _ui_coins_container: Label = $PlayerUI/CoinsContainer/CoinsLabel
 @onready var _step_sound: AudioStreamPlayer3D = $StepSound
 @onready var _landing_sound: AudioStreamPlayer3D = $LandingSound
 
@@ -97,7 +96,6 @@ func _physics_process(delta: float) -> void:
 
 	# Set aiming camera and UI
 	_camera_controller.set_pivot(_camera_controller.CAMERA_PIVOT.THIRD_PERSON)
-	_ui_aim_recticle.visible = false
 
 	# Update attack state and position
 
@@ -164,13 +162,13 @@ func reset_position() -> void:
 
 func collect_coin() -> void:
 	_coins += 1
-	_ui_coins_container.update_coins_amount(_coins)
+	_ui_coins_container.text = str(_coins)
 
 
 func lose_coins() -> void:
 	var lost_coins: int = min(_coins, 5)
 	_coins -= lost_coins
-	_ui_coins_container.update_coins_amount(_coins)
+	_ui_coins_container.text = str(_coins)
 
 
 func _get_camera_oriented_input() -> Vector3:

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c13vtlp1464k1"]
+
+[ext_resource type="PackedScene" uid="uid://cwfas37art3nq" path="res://floor.fbx" id="1_oj3tl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oj3tl"]
+albedo_color = Color(0.9764706, 0.9137255, 0.69411767, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oj3tl"]
+size = Vector3(199.134, 12.29, 244.384)
+
+[node name="floor" unique_id=2012100019 instance=ExtResource("1_oj3tl")]
+
+[node name="Cube" parent="." index="0" unique_id=1669878479]
+material_override = SubResource("StandardMaterial3D_oj3tl")
+cast_shadow = 0
+ignore_occlusion_culling = true
+gi_lightmap_texel_scale = 0.8
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube" index="0" unique_id=1992466831]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube/StaticBody3D" index="0" unique_id=147808086]
+shape = SubResource("BoxShape3D_oj3tl")

@@ -9,7 +9,7 @@ data = PackedVector3Array(-0.0278, 0.0207, -0.0112, -0.0257, 0.0209, 0.0155, -0.
 
 [node name="stone_ring" unique_id=868655777 instance=ExtResource("1_62at5")]
 
-[node name="RootNode_stone_ring#StaticBody3D" type="StaticBody3D" parent="stone_ring" parent_id_path=PackedInt32Array(892205337) index="0" unique_id=880854758 groups=["damageables"]]
+[node name="RootNode_stone_ring#StaticBody3D" type="StaticBody3D" parent="stone_ring" parent_id_path=PackedInt32Array(2055039571) index="0" unique_id=880854758 groups=["damageables"]]
 script = ExtResource("2_r2w1c")
 ColourMaterial = ExtResource("3_ix3mh")
 

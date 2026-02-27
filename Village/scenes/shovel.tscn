@@ -9,7 +9,7 @@ data = PackedVector3Array(-0.0141, 0.005, 0.0676, 0.0025, 0.005, -0.0263, 0.0075
 
 [node name="shovel" unique_id=313387967 instance=ExtResource("1_akfb4")]
 
-[node name="RootNode_shovel#StaticBody3D" type="StaticBody3D" parent="shovel" parent_id_path=PackedInt32Array(531180725) index="0" unique_id=312073572 groups=["damageables"]]
+[node name="RootNode_shovel#StaticBody3D" type="StaticBody3D" parent="shovel" parent_id_path=PackedInt32Array(1038887274) index="0" unique_id=312073572 groups=["damageables"]]
 script = ExtResource("2_8t8lb")
 ColourMaterial = ExtResource("3_kthrd")
 
