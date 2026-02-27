@@ -15,12 +15,16 @@ dest_files=["res://.godot/imported/village farm.gltf-10c099d63cd9f5d7e8f817fe941
 
 nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true
-meshes/light_baking=1
+meshes/light_baking=2
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
@@ -28,20 +32,27 @@ animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={
 "materials": {
 "Material #25": {
 "use_external/enabled": true,
-"use_external/path": "res://Village/materials/Material #25.tres"
+"use_external/fallback_path": "res://Village/materials/Material #25.tres",
+"use_external/path": "uid://dbf5cdsu6u6mq"
 },
 "Material #26": {
 "use_external/enabled": true,
-"use_external/path": "res://Village/materials/Material #26.tres"
+"use_external/fallback_path": "res://Village/materials/Material #26.tres",
+"use_external/path": "uid://dehyujsd10ap1"
 },
 "houses": {
 "use_external/enabled": true,
-"use_external/path": "res://Village/materials/houses.tres"
+"use_external/fallback_path": "res://Village/materials/houses.tres",
+"use_external/path": "uid://bjgk3vnrqxbla"
 }
 }
 }

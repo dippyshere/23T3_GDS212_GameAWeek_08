@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="GDS212_GameAWeek_08"
 run/main_scene="res://MainColourLevel.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
@@ -23,20 +27,24 @@ FullScreenHandler="*res://FullScreenHandler.gd"
 
 [compression]
 
-formats/zstd/compression_level=5
+formats/zstd/compression_level=22
+formats/zlib/compression_level=9
+formats/gzip/compression_level=9
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/borderless=true
 window/stretch/mode="canvas_items"
-window/ssil/quality=1
+window/dpi/allow_hidpi=false
 window/ssao/quality=1
 window/sdfgi/probe_ray_count=0
+window/ssil/quality=1
 
-[dotnet]
+[filesystem]
 
-project/assembly_name="TPS Demo"
+import/fbx2gltf/enabled=false
 
 [input]
 
@@ -98,18 +106,26 @@ pause={
 
 [rendering]
 
+occlusion_culling/bvh_build_quality=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 renderer/rendering_method.web="forward_plus"
 driver/threads/thread_model=2
+textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
 textures/webp_compression/compression_method=4
 textures/webp_compression/lossless_compression_factor=75.0
 lights_and_shadows/directional_shadow/size=2048
 lights_and_shadows/directional_shadow/size.mobile=1024
 2d/shadow_atlas/size=1024
+shader_compiler/shader_cache/strip_debug=true
 global_illumination/gi/use_half_resolution=true
+driver/depth_prepass/enable=false
 environment/ssao/quality=1
 environment/ssil/quality=1
 global_illumination/sdfgi/probe_ray_count=0
 global_illumination/sdfgi/frames_to_update_lights=3
+textures/basis_universal/zstd_supercompression_level=22
+lightmapping/denoising/denoiser=1
 lights_and_shadows/positional_shadow/atlas_size=2048
 lights_and_shadows/positional_shadow/atlas_size.mobile=1024
